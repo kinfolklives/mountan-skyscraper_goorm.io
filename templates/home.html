@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<title>Map & Info</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- // skyscraper start // -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ <!-- // skyscraper end // -->
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<style>
+body,h1,h2{font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+p {line-height: 2}
+.bgimg{
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity:70%;
+  animation: kenburns-top-left 5s ease-out both;
+  animation: blink-1 0.6s both;
+}
+.bgimg2 {
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  
+}
+.bgimg {background-image: url("/static/css/bldg03.jpg")}
+.bgimg2 {background-image: url("/static/css/mountain05.jpg")}
+
+tr.detail {
+display: none;
+width: 100%;
+}
+tr.detail div {
+display: none;
+}
+tr:hover {background-color:#f5f5f5;}
+
+.showmore:hover {
+cursor: pointer;
+}
+.front_text {
+	-webkit-animation: tracking-in-contract-bck-top 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-contract-bck-top 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+.front{
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  opacity:50%;
+}
+.kenburns-top-left {
+	-webkit-animation: kenburns-top-left 5s ease-out both;
+	        animation: kenburns-top-left 5s ease-out both;
+}
+
+</style>
+<body>
+
+<!-- Header / Home-->
+<header class="w3-display-container w3-wide bgimg w3-grayscale-min front_text" id="home">
+  <div class="w3-display-middle w3-text-white w3-center">
+    <div>
+
+    <h1 class="w3-jumbo w3-text-white w3-animate-opacity " >
+      M O U N T A I N<br>S K Y S C R A P E R
+    </h1>
+    <h2 class ="w3-text-white w3-text- w3-animate-opacity">Map & Info</h2>
+
+    <h2><b></b></h2>
+    </div>
+  </div>
+</header>
+
+<!-- Navbar (sticky bottom) -->
+<div class="w3-bottom w3-hide-small">
+  <div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-on">
+    <a href="#home" style="width:25%" class="w3-bar-item w3-button">Home</a>
+    <a href="/mountains/" style="width:25%" class="w3-bar-item w3-button">MOUNTAINS</a>
+    <a href="/buildings/" style="width:25%" class="w3-bar-item w3-button">SKYSCRAPERS</a>
+    <a href="#rsvp" style="width:25%" class="w3-bar-item w3-button w3-hover-black">MEMBER</a>
+  </div>
+</div>
+
+<!-- RSVP section -->
+<div class="w3-container w3-padding-64 w3-light-gray w3-center w3-wide" id="rsvp">
+  <br><br><br><br><br><br><br><br><br>
+  <h1 class="w3-animate-opacity ">WANT TO CONTACT US?</h1>
+  <p class="w3-large w3-animate-opacity ">PLEASE, PRESS THE BUTTON</p>
+
+  <p class="w3-xlarge">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-round w3-blue-grey w3-opacity w3-hover-opacity-off w3-animate-opacity "  style="padding:8px 60px">CONTACT</button>
+  </p>
+  <br><br><br><br>
+  <p class="w3-large w3-animate-opacity ">< M E M B E R S ></M></p>
+  <p class="w3-light-gray w3-center w3-wide w3-animate-opacity ">Oh Eun-Seok / <a href = "mailto: shellvxd@daum.net">Email</a></p>
+  
+  <p class="w3-light-gray w3-center w3-wide w3-animate-opacity ">Kim Jin-Bae / <a href = "mailto: geezeebe@hanmail.net">Email</a></p>
+  <p class="w3-light-gray w3-center w3-wide w3-animate-opacity ">Choi Eugene / <a href = "mailto: gracedays@naver.com">Email</a></p>
+  <br><br><br>
+
+
+<!-- contact modal -->
+<div id="id01" class="w3-modal">
+  <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="padding:32px;max-width:600px">
+    <div class="w3-container w3-white w3-center">
+      <h1 class="w3-wide ">라면..아니 코딩하고 갈래?</h1>
+      <p>잘 생각 해봐~ 중식 라면제공!</p>
+      <form>
+        <input class="w3-input w3-border" type="text" placeholder="Name(s)" name="name">
+      </form>
+      <p><i>코딩하고갈래</i></p>
+      <div class="w3-row">
+        <div class="w3-half">
+          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-block w3-green">한다</button>
+        </div>
+        <div class="w3-half">
+          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-block w3-red">안한다</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16 w">
+  <p>Published by 코딩하고갈래?</p>
+</footer>
+<div class="w3-hide-small" style="margin-bottom:32px"></div>
+
+
+</body>
+</html>

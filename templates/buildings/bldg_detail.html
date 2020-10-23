@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<title>Map & Info</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- // skyscraper start // -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ <!-- // skyscraper end // -->
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<style>
+.gallery {
+-webkit-column-count: 3;
+-moz-column-count: 3;
+column-count: 3;
+-webkit-column-width: 33%;
+-moz-column-width: 33%;
+column-width: 33%; }
+.gallery .pics {
+-webkit-transition: all 350ms ease;
+transition: all 350ms ease; }
+.gallery .animation {
+-webkit-transform: scale(1);
+-ms-transform: scale(1);
+transform: scale(1); }
+
+@media (max-width: 450px) {
+.gallery {
+-webkit-column-count: 1;
+-moz-column-count: 1;
+column-count: 1;
+-webkit-column-width: 100%;
+-moz-column-width: 100%;
+column-width: 100%;
+}
+}
+
+@media (max-width: 400px) {
+.btn.filter {
+padding-left: 1.1rem;
+padding-right: 1.1rem;
+}
+}
+
+body,h1,h2{font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+p {line-height: 2}
+.bgimg, .bgimg2 {
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.bgimg {background-image: url("/static/css/bldg03.jpg")}
+.bgimg2 {background-image: url("/static/css/mountain05.jpg")}
+
+tr.detail {
+display: none;
+width: 100%;
+}
+tr.detail div {
+display: none;
+}
+.showmore:hover {
+cursor: pointer;
+}
+.spacing{
+    letter-spacing:7px;
+}
+.spacing1{
+    letter-spacing:3px;
+}
+</style>
+<body>
+
+<!-- Navbar (sticky bottom) -->
+<div class="w3-bottom w3-hide-small">
+  <div class="w3-bar w3-white w3-center w3-padding w3-opacity-min w3-hover-opacity-off">
+    <a href="/#home" style="width:25%" class="w3-bar-item w3-button">Home</a>
+    <a href="/mountains/" style="width:25%" class="w3-bar-item w3-button">MOUNTAINS</a>
+    <a href="/buildings/" style="width:25%" class="w3-bar-item w3-button">SKYSCRAPERS</a>
+    <a href="/#rsvp" style="width:25%" class="w3-bar-item w3-button w3-hover-black">MEMBER</a>
+  </div>
+</div>
+
+<div class="w3-container w3-padding-64 w3-light-grey w3-grayscale-min w3-center" id="skyscraper">
+  <div class="w3-content">
+    <h1 class="w3-text-grey w3-xlarge spacing">SKYSCRAPERS DETAIL</h1><br>
+    
+  </div>
+    <div class="container">
+    <div class="w3-container">  
+    <div class="w3-row-padding" style="margin:10 -16px" id="bldg_detail">
+        <br>
+        <table class="table table-hover " >
+            <tbody>
+                <tr> 
+                    <td class="spacing1">RANK</td>
+                    <td class="spacing1">{{data.0.ranking}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">BUILDING NAME</td>
+                    <td class="spacing1">{{data.0.building_name}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">CITY NAME</td>
+                    <td class="spacing1">{{data.0.city_name}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">COUNTRY</td>
+                    <td class="spacing1">{{data.0.country}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">HEIGHT(m)</td>
+                    <td class="spacing1">{{data.0.height_m}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">HEIGHT(ft)</td>
+                    <td class="spacing1">{{data.0.height_ft}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">FLOOR</td>
+                    <td class="spacing1">{{data.0.floor}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">COMPLETION YEAR</td>
+                    <td class="spacing1">{{data.0.completion_year}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">MATERIAL</td>
+                    <td class="spacing1">{{data.0.material}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">CATEGORY</td>
+                    <td class="spacing1">{{data.0.category}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">COORDINATE(X)</td>
+                    <td class="spacing1">{{data.0.x_coord}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">COORDINATE(Y)</td>
+                    <td class="spacing1">{{data.0.y_coord}}</td>
+                </tr>
+                <tr>
+                    <td class="spacing1">REGISTERD DATE</td>
+                    <td class="spacing1">{{data.0.reg_date}}</td>
+                </tr>
+                </tr>
+            </tbody>
+        </table>
+    <div class="gallery" id="gallery">
+    {% for row in data %}
+        <div class="mb-3 pics animation all 1">
+        <img class="img-fluid" src="https://{{row.bldg_link}}" alt="Card image cap">
+        </div>
+    {% endfor %}
+    </div>
+
+    {{ bldg_map|safe }}
+    </div>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>

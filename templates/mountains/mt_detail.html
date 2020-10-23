@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+    
+    <div class="container">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>{{data.0.id}}</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>{{data.0.name}}</td>
+                </tr>
+                <tr>
+                    <td>title</td>
+                    <td>{{data.0.title}}</td>
+                </tr>
+                <tr>
+                    <td>site</td>
+                    <td>{{data.0.site}}</td>
+                </tr>
+                <tr>
+                    <td>height</td>
+                    <td>{{data.0.height}}</td>
+                </tr>
+                <tr>
+                    <td>feature</td>
+                    <td>{{data.0.feature}}</td>
+                </tr>
+                <tr>
+                    <td>overview</td>
+                    <td>{{data.0.overview}}</td>
+                </tr>
+                <tr>
+                    <td>information</td>
+                    <td>{{data.0.information}}</td>
+                </tr>
+                <tr>
+                    <td>leadtime</td>
+                    <td>{{data.0.leadtime}}</td>
+                </tr>
+                <tr>
+                    <td>x_coord</td>
+                    <td>{{data.0.x_coord}}</td>
+                </tr>
+                <tr>
+                    <td>y_coord</td>
+                    <td>{{data.0.y_coord}}</td>
+                </tr>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% for row in data %}
+        <img src={{row.link}}>
+    {% endfor %}
+
+    {{ mountain_map|safe }}
+
+</body>
+</html>

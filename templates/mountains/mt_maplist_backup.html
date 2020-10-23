@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        tr.detail{
+        display: none;
+        width: 100%;
+        }
+        tr.detail div {
+        display: none;
+        }
+        .showmore:hover {
+        cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        {{ mountain_map|safe }}
+
+    </div>
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>산</th>
+                    <th>특징</th>
+                    <th>높이</th>
+                    <th>자세히</th>
+                </tr>
+            </thead>
+            {% for d in data %}
+                <tr>
+                    <td>{{d.0.id}}</td>
+                    <td>{{d.0.name}}</td>
+                    <td>{{d.0.title}}</td>
+                    <td>{{d.0.height}}</td>
+                    <td><button class="showmore">more</button></td>
+                </tr>
+                <tr class="detail">
+                    <td colspan='3'>
+                        <div>
+                            <table class='table table-striped'>
+                                <tbody>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>{{d.0.id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>산 이름</td>
+                                        <td>{{d.0.name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>특징</td>
+                                        <td>{{d.0.title}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>위치</td>
+                                        <td>{{d.0.site}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>해발고도</td>
+                                        <td>{{d.0.height}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>지정이유</td>
+                                        <td>{{d.0.feature}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>개관</td>
+                                        <td>{{d.0.overview}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>정보</td>
+                                        <td>{{d.0.information}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>소요시간</td>
+                                        <td>{{d.0.leadtime}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>경도</td>
+                                        <td>{{d.0.x_coord}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>위도</td>
+                                        <td>{{d.0.y_coord}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <div>
+                    {% for link in d.0.link %}
+                        <img class="detail" src={{link}}>
+                    {% endfor %}
+                </div>
+                <div>
+                    {{ d.0.map|safe }}
+                </div>
+            {% endfor %}
+        </table>
+
+
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if paging.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paging.previous_page_number }}">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+            <!-- 페이지리스트 -->
+            {% for page_number in paging.paginator.page_range %}
+                {% if page_number == paging.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            <!-- 다음페이지 -->
+            {% if paging.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paging.next_page_number }}">다음</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+
+
+
+
+<script>
+
+    // table sliding toggle
+    $(function() {
+        $('button.showmore').click(function(e) {
+            e.preventDefault();
+            // We break and store the result so we can use it to hide
+            // the row after the slideToggle is closed
+            var targetrow = $(this).closest('tr').next('.detail');
+            targetrow.show().find('div').slideToggle('slow', function(){
+            if (!$(this).is(':visible')) {
+                targetrow.hide();
+            }
+            });
+        });
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>How to make a pagination with django and jquery</title>
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+<!-- queryset for first page -->
+<div id="posts">
+    {% for i in first_page %}
+    <h2>{{i.name}}</h2>
+    {% endfor %}
+</div>
+
+
+<!-- loop pagination -->
+{% for i in page_range %}
+<a style="margin-left: 5px; font-size: 20px;" href="{{i}}">{{i}}</a>
+{% endfor %}
+
+
+<script>
+$('a').click(function(event){
+    event.preventDefault();
+    var page_n = $(this).attr('href');
+    // ajax
+        $.ajax({
+                type: "POST",
+                url: "{% url 'mountains:listajax' %}", // name of url
+                data : {
+                page_n : page_n, //page_number
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function (resp) {
+                //loop
+                $('#posts').html('')
+               $.each(resp.results, function(i, val) {
+                 //apending posts
+                $('#posts').append('<h2>' + val.name + '</h2>')
+               });
+            },
+            error: function () {}
+        }); //
+
+});
+</script>
+
+
+
+    </body></html>

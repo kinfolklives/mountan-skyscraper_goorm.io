@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<title>Map & Info</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- // skyscraper start // -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+ <!-- // skyscraper end // -->
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+<style>
+body,h1,h2{font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+p {line-height: 2}
+.bgimg, .bgimg2 {
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+.bgimg {background-image: url("/static/css/bldg03.jpg")}
+.bgimg2 {background-image: url("/static/css/mountain05.jpg")}
+
+tr.detail {
+display: none;
+width: 100%;
+}
+tr.detail div {
+display: none;
+}
+.showmore:hover {
+cursor: pointer;
+}
+.spacing{
+    letter-spacing:7px;
+}
+.spacing1{
+    letter-spacing:4px;
+}
+.press {
+    color: #333;
+    font-size: 5em;
+    text-shadow: 0 1px 0 #777, 0 -1px 0 #000;
+}
+
+</style>
+<body>
+
+
+<!-- Navbar (sticky bottom) -->
+<div class="w3-bottom w3-hide-small">
+  <div class="w3-bar w3-blue-gray w3-center w3-padding w3-opacity-min w3-hover-opacity-off">
+    <a href="/#home" style="width:25%" class="w3-bar-item w3-button">HOME</a>
+    <a href="/mountains/" style="width:25%" class="w3-bar-item w3-button">MOUNTAINS</a>
+    <a href="/buildings/" style="width:25%" class="w3-bar-item w3-button">SKYSCRAPERS</a>
+    <a href="/#rsvp" style="width:25%" class="w3-bar-item w3-button w3-hover-black">MEMBER</a>
+  </div>
+</div>
+
+<!-- skyscrapers information -->
+
+<div class="w3-container w3-padding-64 w3-light-gray w3-grayscale-min w3-center" id="skyscraper">
+  <div class="w3-content">
+    <h1 class="w3-text-grey w3-xlarge spacing1">S K Y S C R A P E R S</h1>
+    <p class="w3-text-gray spacing1">100 Tallest Buildings in the World</p>
+</div>
+
+
+<!-- skyscraper list -->
+  <div class="container">
+  <div class="w3-container">  
+  <div class="w3-row-padding" style="margin:10 -16px" id="bldg_list">
+  <br>
+  {{ bldg_map|safe }} 
+        <!-- // skyscraper list start // -->
+        <table class="table" id="table_bldg_list">
+            <thead>
+                <tr>
+                    <th class="spacing">RANK</th>
+                    <th class="spacing">BUILDING NAME</th>
+                    <th class="spacing">CITY</th>
+                    <th class="spacing">HEIGHT (m)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in bldg_data %}
+                <tr>
+                    <td><a href="{% url 'buildings:bldg_detail' row.id %}">{{row.ranking}}</a></td>
+                    <td><a href="{% url 'buildings:bldg_detail' row.id %}">{{row.building_name}}</a></td>
+                    <td><a href="{% url 'buildings:bldg_detail' row.id %}">{{row.city_name}}({{row.country}})</a></td>
+                    <td><a href="{% url 'buildings:bldg_detail' row.id %}">{{row.height_m}} {{"m"}}</a></td>
+                    <td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if bldg_data.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ bldg_data.previous_page_number }}#table_bldg_list">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+            <!-- 페이지리스트 -->
+            {% for page_number in bldg_data.paginator.page_range %}
+                {% if page_number == bldg_data.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?page={{ page_number }}#table_bldg_list">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_number }}#table_bldg_list">{{ page_number }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            <!-- 다음페이지 -->
+            {% if bldg_data.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ bldg_data.next_page_number }}#table_bldg_list">다음</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+  </div>
+  </div>
+  </div>
+        <!-- // skyscraper list end // -->
+</div>
+<!-- End MT photo -->
+
+
+</body>
+</html>
